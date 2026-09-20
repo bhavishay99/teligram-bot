@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Assistant Chatbot Demo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            width: 380px;
+            height: 520px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-header {
+            background: #0088cc;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .chat-box {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .message {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .bot-msg {
+            background: #e4e6eb;
+            color: #000;
+            align-self: flex-start;
+        }
+        .user-msg {
+            background: #0088cc;
+            color: white;
+            align-self: flex-end;
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .option-btn {
+            background: #ffffff;
+            border: 1px solid #0088cc;
+            color: #0088cc;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .option-btn:hover {
+            background: #0088cc;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">
+        🤖 Bhavishay Assistant Demo
+    </div>
+    <div class="chat-box" id="chatBox">
+        <div class="message bot-msg">
+            नमस्कार! 👋 हमारी डिजिटल सेवाओं में आपका स्वागत है। आप क्या जानना चाहते हैं?
+            <div class="btn-container">
+                <button class="option-btn" onclick="sendOption('हमारी सेवाएं')">🚀 हमारी सेवाएं</button>
+                <button class="option-btn" onclick="sendOption('प्रोजेक्ट शुरू करें')">💼 प्रोजेक्ट शुरू करें</button>
+                <button class="option-btn" onclick="sendOption('संपर्क करें')">📞 संपर्क करें</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function addMessage(text, isUser) {
+        const chatBox = document.getElementById('chatBox');
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${isUser ? 'user-msg' : 'bot-msg'}`;
+        msgDiv.innerHTML = text;
+        chatBox.appendChild(msgDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendOption(optionText) {
+        // यूजर मैसेज
+        addMessage(optionText, true);
+
+        // बॉट का रिप्लाई (ऑटोमेटेड)
+        setTimeout(() => {
+            if (optionText === 'हमारी सेवाएं') {
+                addMessage(`📱 <b>हमारी सेवाएं:</b><br><br>1️⃣ Custom Telegram & Web Bots<br>2️⃣ Full-Stack Web Development<br>3️⃣ AI Integration Tools<br><br>क्या आप कोई प्रोजेक्ट बनवाना चाहते हैं?
+                <div class="btn-container">
+                    <button class="option-btn" onclick="sendOption('प्रोजेक्ट शुरू करें')">💼 प्रोजेक्ट शुरू करें</button>
+                    <button class="option-btn" onclick="sendOption('मुख्य मेनू')">⬅️ मुख्य मेनू</button>
+                </div>`, false);
+            } else if (optionText === 'प्रोजेक्ट शुरू करें') {
+                addMessage(`✅ <b>प्रोजेक्ट ऑर्डर करने के लिए:</b><br><br>कृपया अपनी आवश्यकता और ईमेल दर्ज करें। हमारी टीम आपसे 24 घंटे के अंदर संपर्क करेगी।`, false);
+            } else if (optionText === 'संपर्क करें') {
+                addMessage(`📞 <b>संपर्क जानकारी:</b><br><br>ईमेल: support@example.com<br>टेलीग्राम सपोर्ट लाइव है।`, false);
+            } else if (optionText === 'मुख्य मेनू') {
+                addMessage(`आप मुख्य मेनू पर हैं। नीचे से विकल्प चुनें:
+                <div class="btn-container">
+                    <button class="option-btn" onclick="sendOption('हमारी सेवाएं')">🚀 हमारी सेवाएं</button>
+                    <button class="option-btn" onclick="sendOption('प्रोजेक्ट शुरू करें')">💼 प्रोजेक्ट शुरू करें</button>
+                    <button class="option-btn" onclick="sendOption('संपर्क करें')">📞 संपर्क करें</button>
+                </div>`, false);
+            }
+        }, 500);
+    }
+</script>
+
+</body>
+</html>
